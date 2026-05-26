@@ -14,12 +14,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           
-      # En kritik adım: Gradle bağımlılıklarını kendisi indirsin
       - name: Build with Gradle
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug --refresh-dependencies
+          # Gradle sürümünü zorlayarak belirliyoruz
+          ./gradlew wrapper --gradle-version 8.7
+          ./gradlew assembleDebug
         env:
           FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
